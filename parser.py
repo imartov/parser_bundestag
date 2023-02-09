@@ -2,6 +2,7 @@ import requests
 from bs4 import BeautifulSoup
 import lxml
 import json
+from time import sleep
 
 
 # list_person_hrefs = []
@@ -64,8 +65,12 @@ for href in persons_hrefs_list:
     data_list.append(data)
 
     print(f"Всего выполнено: {count}\n{person_name} добавлен")
+
+    if count % 30 == 0:
+        sleep(6)
+        
     count += 1
 
-with open("persons_data.json", "w", encoding="utf-8") as file:
-    json.dump(data_list, file, indent=4)
+    with open("persons_data.json", "w", encoding="utf-8") as file:
+        json.dump(data_list, file, indent=4, ensure_ascii=False)
 
